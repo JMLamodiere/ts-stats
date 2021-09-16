@@ -1,5 +1,5 @@
-import { dateStringToDate } from "../Utils";
-import { MatchData, MatchDataCollection, MatchResult } from "../MatchData";
+import { dateStringToDate } from "./Utils";
+import { MatchData, MatchDataCollection, MatchResult } from "./MatchData";
 
 export interface DataReader {
   read(): string[][];

@@ -1,21 +1,8 @@
-import { ConcreteMatchReader } from "./inheritance/ConcreteMatchReader";
-import { CsvFileReader } from "./composition/CsvFileReader";
-import { MatchReader } from "./composition/MatchReader";
-import { MatchDataCollection } from "./MatchData";
+import { CsvFileReader } from "./CsvFileReader";
+import { MatchReader } from "./MatchReader";
 
-//inheritance
-const reader = new ConcreteMatchReader("football.csv");
-const inheritanceMatches = new MatchDataCollection(reader.read());
-
-console.log(
-  `Man United won ${inheritanceMatches.manUnitedWins()} games using inheritance`
-);
-
-//composition
 const csvReader = new CsvFileReader("football.csv");
 const matchReader = new MatchReader(csvReader);
 const matches = matchReader.load();
 
-console.log(
-  `Man United won ${matches.manUnitedWins()} games using composition`
-);
+console.log(`Man United won ${matches.manUnitedWins()} games`);
