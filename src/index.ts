@@ -1,17 +1,23 @@
-import { MatchResult } from "./MatchResult";
 import { ConcreteMatchReader } from "./inheritance/ConcreteMatchReader";
+import { CsvFileReader } from "./composition/CsvFileReader";
+import { MatchReader } from "./composition/MatchReader";
+import { MatchDataCollection } from "./MatchData";
 
+//inheritance
 const reader = new ConcreteMatchReader("football.csv");
 reader.read();
 
-let manUnitedWins = 0;
+const inheritanceMatches = new MatchDataCollection(reader.data);
 
-for (let match of reader.data) {
-  if (match[1] === "Man United" && match[5] === MatchResult.HomeWin) {
-    manUnitedWins++;
-  } else if (match[2] === "Man United" && match[5] === MatchResult.AwayWin) {
-    manUnitedWins++;
-  }
-}
+console.log(
+  `Man United won ${inheritanceMatches.manUnitedWins()} games using inheritance`
+);
 
-console.log(`Man United won ${manUnitedWins} games`);
+//composition
+const csvReader = new CsvFileReader("football.csv");
+const matchReader = new MatchReader(csvReader);
+const matches = matchReader.load();
+
+console.log(
+  `Man United won ${matches.manUnitedWins()} games using composition`
+);
