@@ -2,12 +2,10 @@ import fs from "fs";
 import { DataReader } from "./MatchReader";
 
 export class CsvFileReader implements DataReader {
-  data: string[][] = [];
+  constructor(private filename: string) {}
 
-  constructor(public filename: string) {}
-
-  read(): void {
-    this.data = fs
+  read(): string[][] {
+    return fs
       .readFileSync(this.filename, {
         encoding: "utf-8",
       })
