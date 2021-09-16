@@ -15,21 +15,16 @@ export type MatchData = [
 ];
 
 export class MatchDataCollection {
-  constructor(public matches: MatchData[]) {}
+  constructor(private matches: MatchData[]) {}
 
   manUnitedWins(): number {
-    let manUnitedWins = 0;
-    for (let match of this.matches) {
-      if (match[1] === "Man United" && match[5] === MatchResult.HomeWin) {
-        manUnitedWins++;
-      } else if (
-        match[2] === "Man United" &&
-        match[5] === MatchResult.AwayWin
-      ) {
-        manUnitedWins++;
-      }
-    }
+    return this.matches.filter(MatchDataCollection.isWon).length;
+  }
 
-    return manUnitedWins;
+  private static isWon(match: MatchData): boolean {
+    return (
+      (match[1] === "Man United" && match[5] === MatchResult.HomeWin) ||
+      (match[2] === "Man United" && match[5] === MatchResult.AwayWin)
+    );
   }
 }

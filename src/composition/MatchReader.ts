@@ -2,16 +2,14 @@ import { dateStringToDate } from "../Utils";
 import { MatchData, MatchDataCollection, MatchResult } from "../MatchData";
 
 export interface DataReader {
-  read(): void;
-  data: string[][];
+  read(): string[][];
 }
 
 export class MatchReader {
-  constructor(public reader: DataReader) {}
+  constructor(private reader: DataReader) {}
 
   load(): MatchDataCollection {
-    this.reader.read();
-    const rows = this.reader.data.map((row: string[]): MatchData => {
+    const rows = this.reader.read().map((row: string[]): MatchData => {
       return [
         dateStringToDate(row[0]),
         row[1],

@@ -5,9 +5,7 @@ import { MatchDataCollection } from "./MatchData";
 
 //inheritance
 const reader = new ConcreteMatchReader("football.csv");
-reader.read();
-
-const inheritanceMatches = new MatchDataCollection(reader.data);
+const inheritanceMatches = new MatchDataCollection(reader.read());
 
 console.log(
   `Man United won ${inheritanceMatches.manUnitedWins()} games using inheritance`
